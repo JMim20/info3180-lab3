@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <form method="post" action="{{ url_for('wtform') }}" novalidate>
+
+        <div class="inpuHeader">
+            {{ form.name.label(class="form-label") }} {{ form.name(class="form-control") }} {{ form.name(size=20) }}
+        </div>
+
+        <!-- <div class="inpuHeader">
+            {{ form.firstname.label(class="form-label") }} {{ form.firstname(class="form-control") }} {{ form.firstname(size=20) }}
+        </div>
+        <div class="inpuHeader">
+            {{ form.lastname.label(class="form-label") }} {{ form.lastname(class="form-control") }} {{ form.lastname(size=20) }}
+        </div> -->
+        <div class="inpuHeader">
+            {{ form.email.label(class="form-label") }} {{ form.email(class="form-control", placeholder="johndoe@example.com") }}
+        </div>
+        <div class="inpuHeader">
+            {{ form.message.label(class="form-label") }} {{ form.message(class="form-control", rows="5") }}
+        </div>
+
+        {{ form.csrf_token }}
+
+    <button type="submit" class="submitBtn">Submit</button>
+</form>
+{% endblock %}
