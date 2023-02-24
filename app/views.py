@@ -1,9 +1,10 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app import mail
 from flask_mail import Message
+from app import mail
 
 from .forms import ContactForm
+
 
 ###
 # Routing for your application.
@@ -79,16 +80,15 @@ def contact():
     if request.method == 'POST':
         if cForm.validate_on_submit():
 
-            #firstname = cForm.firstname.data
-            #lastname = cForm.lastname.data
+            
             name = cForm.name.data
             email = cForm.email.data
             subject=cForm.subject.data
             messg = cForm.message.data
 
             msg = Message(subject, 
-            sender=(name, "from@example.com"),
-            recipients=email)
+            sender=(name, email),
+            recipients=[app.config['MAIL_USERNAME']])
             msg.body = messg
             #msg.html = "<b>This is the body of the message</b>"
             mail.send(msg)
