@@ -61,30 +61,29 @@ def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
 
-"""@app.route('/contact', methods=['POST'])
-def contact():
-    cForm = contactForm()
-    if cForm.validate_on_submit():
-        msg = Message("Your Subject", 
-        sender=("Senders Name", "from@example.com"),
-        recipients=["to@example.com"])
-        msg.body = 'This is the body of the message'
-        #msg.html = "<b>This is the body of the message</b>"
-        mail.send(msg)
+# @app.route('/contact', methods=['POST'])
+# def contact():
+#     cForm = contactForm()
+#     if cForm.validate_on_submit():
+#         msg = Message("Your Subject", 
+#         sender=("Senders Name", "from@example.com"),
+#         recipients=["to@example.com"])
+#         msg.body = 'This is the body of the message'
+#         #msg.html = "<b>This is the body of the message</b>"
+#         mail.send(msg)
 
-    return render_template('contact.html')"""
+#     return render_template('contact.html')
 
 @app.route('/contact', methods=['GET','POST'])
 def contact():
-    cForm = ContactForm()
+    form = ContactForm()
     if request.method == 'POST':
-        if cForm.validate_on_submit():
-
-            
-            name = cForm.name.data
-            email = cForm.email.data
-            subject=cForm.subject.data
-            messg = cForm.message.data
+        if form.validate_on_submit():
+ 
+            name =form.name.data
+            email =form.email.data
+            subject=form.subject.data
+            messg = form.message.data
 
             msg = Message(subject, 
             sender=(name, email),
@@ -94,8 +93,7 @@ def contact():
             mail.send(msg)
             flash('Email was sent successfully!')
             return redirect(url_for('home'))
-        else:
-                flash_errors(cForm)
-    return render_template('contact.html', form=cForm)
+    flash_errors(form)
+    return render_template('contact.html', form=form)
 
    

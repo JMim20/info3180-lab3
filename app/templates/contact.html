@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <form method="post" action="{{ url_for('contact') }}" novalidate>
+
+    <h1>Contact Form</h1>
+    <hr>
+    <p>Fill in this form to contact the site owners.</p>
+
+    <form method="post" action="{{ url_for('contact') }}" >
         {{ form.csrf_token }}
         <div class="inpuHeader">
             {{ form.name.label(class="form-label") }} {{ form.name(class="form-control" , size=20) }} 
